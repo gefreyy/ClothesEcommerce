@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2&family=Noto+Sans:ital,wght@0,100..900;1,100..900');
+@import url('https://fonts.googleapis.com/css2&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000');
+
+#banner-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.discount-message {
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-size: .9rem;
+    padding: .5rem;
+    font-family: "Poppins", sans-serif;
+}
+
+.slider-container {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-banner {
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transition: transform .5s ease-in-out;
+}
+
+.left-arrow-container {
+    position: absolute;
+    top: 50%;
+    left: 1%;
+    z-index: 3;
+}
+
+.right-arrow-container {
+    position: absolute;
+    top: 50%;
+    right: 1%;
+    z-index: 3;
+}
+
+.yapping button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.795);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: .3rem;
+    transition: all .2s ease-in-out;
+}
+
+.yapping button:hover {
+    background: rgba(0, 0, 0, 0.068);
+}
+
+.yapping a {
+    text-decoration: none;
+    color: black;
+}
+
+.banner-and-yap-container {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.banner-and-yap-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0rem 8rem;
+    width: max-content;
+}
+
+.yapping {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    font-family: "Playfair Display", serif;
+    flex: 1;
+
+}
+
+.yapping h1 {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.yapping p {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.yapping a {
+    text-align: center;
+    background-color: rgba(255, 217, 0, 0.548);
+    padding: 1rem;
+    border-radius: 5px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    transition: all .3s ease-in-out;
+}
+
+.yapping a:hover {
+    background-color: rgba(255, 217, 0, 0.856);
+}
+
+.image-model {
+    position: relative;
+    width: 50%;
+    min-height: 600px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.model-man-banner, .model-woman-banner, .another-model-man-banner {
+    position: absolute;
+    filter: drop-shadow(-50px 5px 5px #22222267);
+    pointer-events: none;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+}
+
+.model-man-banner {
+    left: -32%;
+}
+
+.model-woman-banner {
+    top: -180px;
+    left: -32%;
+}
+
+.another-model-man-banner {
+    top: -80px;
+    left: -66.5%;
+}
+
+hr {
+    margin: 2rem;
+    border: 0;
+    border-top: 1px solid #00000025;
+}
+
+#category-home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.category-link {
+    width: 320px;
+}
+
+.category-home-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.background-img-hombres, .background-img-mujeres, .background-img-ninos {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 1/1;
+}
+
+.background-img-hombres {
+    background-image: url('/src/assets/img/another-model-dude.png');
+}
+
+.background-img-mujeres {
+    background-image: url('/src/assets/img/model-woman.png');
+}
+
+.background-img-ninos {
+    background-image: url('/src/assets/img/model-kid.png');
+    background-position-y: -20px;
+}
+
+.desc-art-man, .desc-art-woman, .desc-art-kid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-weight: 400;
+    font-size: 1.2rem;
+    font-family: "Nunito Sans";
+    opacity: 0;
+    transition: background-color, opacity .3s ease-in-out;
+}
+
+.desc-art-man:hover, .desc-art-woman:hover, .desc-art-kid:hover {
+    background-color: rgba(0, 0, 0, 0.466);
+    opacity: 1;
+    background-repeat: no-repeat;
+    background-blend-mode: color-burn;
+    filter: drop-shadow(-10px 5px 5px #2222223a);
+
+}
+
+.desc-art-man:hover {
+    background-image: url('/src/assets/img/another-model-dude-alone.png');
+    background-position: center;
+    background-size: 105%;
+}
+
+.desc-art-woman:hover {
+    background-image: url('/src/assets/img/model-woman-alone.png');
+    background-position: center;
+    background-size: 155%;
+}
+
+.desc-art-kid:hover {
+    background-image: url('/src/assets/img/model-kid-alone.png');
+    background-position: center;    
+    background-position-y: -30.5px;
+    background-size: 105%;
+}
+
+@media (max-width: 1200px) {
+    
+    /* .image-model {
+        width: 100%;
+        max-width: 800px;
+        min-width: 800px;
+    } */
+    
+    .model-man-banner {
+        width: 450px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -35%);
+        flex: 1;
+    }
+    
+    .model-woman-banner {
+        width: 550px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -45%);
+    }
+
+    .another-model-man-banner {
+        width: 490px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -43%);
+        flex: 1;
+    }
+}
+
+@media (max-width: 960px) {
+    .banner-and-yap-section {
+        padding: 0 3rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        width: 2rem;
+        flex: 1;
+        max-width: 970px;
+    }
+}
+
+@media (max-width: 735px) {
+    /* .banner-and-yap-container {
+        min-width: 100%;
+    } */
+
+    .banner-and-yap-section {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        padding: 0 1rem;
+        flex: 1;
+        width: 100%;
+    }
+
+    .yapping h1 {
+        font-size: clamp(1rem, 5vw, 6rem);
+    }
+
+    .yapping p {
+        font-size: clamp(.8rem, 2vw, 1.5rem);
+    }
+
+    .yapping, .image-model {
+        width: 100%;
+    }
+}
+
+@media (max-width: 485px) {
+    .image-model {
+        min-height: 380px;
+    }
+
+    .model-man-banner {
+        width: 350px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -30%);
+    }
+    
+    .model-woman-banner {
+        width: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -35%);
+    }
+
+    .another-model-man-banner {
+        width: 390px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -36%);
+    }
+}
