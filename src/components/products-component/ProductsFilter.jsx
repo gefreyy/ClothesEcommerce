@@ -1,14 +1,15 @@
 export default function ProductFilters({
-    categories, 
+    categories,
     selectedCategories, 
     onCategoryChange, 
     price, 
-    onPriceChange 
+    onPriceChange,
+    filters
 }) {
     return (
-        <aside className="products-filters-container">
-            <h3>Filtros</h3>
+        <aside className={filters ? 'products-filters-container open' : 'products-filters-container'}>
             <div className="products-filters">
+                <h3>Filtros</h3>
                 <div className="filters-container">
                     {categories.map((category, index) => (
                         <div className="filter-item" key={index}>
@@ -22,7 +23,7 @@ export default function ProductFilters({
                             <label htmlFor={category.id}>{category.name}</label>
                         </div>
                     ))}
-                    
+                        
                     <div className="filter-price-slider">
                         <label htmlFor="price">Precio</label>
                         <input 

@@ -9,7 +9,7 @@ export default function ModalProduct({product, isModalOpened, closeModal}) {
                 </div>
                 <div className="modal-info-container">
                     <h1>{product.name}</h1>
-                    <h3>Precio: {product.price !== undefined ? product.price.toFixed(2) : product.price}</h3>
+                    <h3>Precio: S/{product.price !== undefined ? product.price.toFixed(2) : product.price}</h3>
                     <p>{product.desc}</p>
                     <AddToCart />
                     <button className="close-btn" onClick={closeModal}>×</button>

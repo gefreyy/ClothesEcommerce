@@ -2,13 +2,23 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { useEffect, useState } from 'react';
 
-export default function Header() {
+export default function Header({setSearchTerm}) {
     // isMenuOpen es una variable booleana que indica si el menu esta abierto o cerrado, es decir, true o false
     // setIsMenuOpen es una funcion que cambia el estado del isMenuOpen
     // useState permite cambiar el estado de este
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(true)
+    const [localSearchTerm, setLocalSearchTerm] = useState('')
+
     const toggleMenu = () => {
         setIsMenuOpen(prev => !prev)
+    };
+    const toggleSearch = () => {
+        setIsSearchOpen(prev => !prev)
+    }
+
+    const handleSearch = () => {
+        setSearchTerm(localSearchTerm); // ← Esto envía el texto a Products.jsx
     };
 
     useEffect(() => {
@@ -17,6 +27,7 @@ export default function Header() {
 
     return (
         <header id='header-section'>
+            
             <button onClick={toggleMenu} className='hamburguer-button'><img src="../src/assets/img/hamburguer-menu-icon.png" alt="hamburguer-button-icon" /></button>
             <div className={isMenuOpen ? 'lateral-menu open' : 'lateral-menu'}>
                 <div className="menu-top">
@@ -32,7 +43,7 @@ export default function Header() {
             </div>
 
             <a href="#"><img className='logo-img' src="../src/assets/img/lorem-lorem.svg" alt="logo-shop" /></a>
-            <nav>
+            <nav className={isSearchOpen ? 'nav-menu show' : 'nav-menu hide'}>
                 <ul>
                 <li>
                     <Link className='home-li link' to="/">Inicio</Link></li>
@@ -42,7 +53,18 @@ export default function Header() {
                 </ul>
             </nav>
             <div className="options-icons">
-                <a href="#" className='icon-header'><img src="../src/assets/img/search-icon.png" alt="search-icon" /></a>
+                <button onClick={toggleSearch} className={isSearchOpen ? 'button-search show' : 'button-search hide'}><img src="../src/assets/img/search-icon.png" alt="search-icon" /></button>
+                <div className={isSearchOpen ? 'search-input hide' : 'search-input show'}>
+                    <input 
+                        type="text"
+                        value={localSearchTerm}
+                        onChange={(e) => setLocalSearchTerm(e.target.value)}
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter') {
+                                handleSearch()
+                            }
+                        }}/>
+                </div>
                 <a href="#" className='icon-header'><img src="../src/assets/img/user-icon.png" alt="user-icon" /></a>
                 <a href='#' className='icon-header'><img src="../src/assets/img/shopping-cart-icon.png" alt="shopping-cart-icon" /></a>
             </div>

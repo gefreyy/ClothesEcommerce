@@ -2,10 +2,10 @@ import ProductFilters from "./ProductsFilter.jsx"
 import ProductCard from "./ProductsCard.jsx"
 import "./ProductBody.css"
 import Pagination from "./ProductsPagination.jsx"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import ModalProduct from "./ProductModal.jsx"
 
-export default function ProductsBody() {
+export default function ProductsBody({search}) {
     const products = [
         {
             id: 1,
@@ -51,6 +51,69 @@ export default function ProductsBody() {
             price: 99.90,
             category: 'Sudaderas',
             tag: ['minimalista']
+        },
+        {
+            id: 6,
+            imgProduct: 'https://images.unsplash.com/photo-1630167146816-e1f4ff99c00c?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Camisa de cuadros',
+            desc: 'Camisa de cuadros, perfecta para looks casuales y elegantes.',
+            price: 59.90,
+            category: 'Camisas',
+            tag: ['casual', 'elegante']
+        },
+        {
+            id: 7,
+            imgProduct: 'https://images.unsplash.com/photo-1661110546807-4c1ce22ceced?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Pantalón cargo',
+            desc: 'Pantalón de estilo cargo, cómodo y práctico para el día a día.',
+            price: 79.90,
+            category: 'Pantalones',
+            tag: ['cargo', 'casual']
+        },
+        {
+            id: 8,
+            imgProduct: 'https://images.unsplash.com/photo-1586038693164-cb7ee3fb8e2c?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Sudadera con capucha',
+            desc: 'Sudadera abrigadora con capucha, ideal para días fríos.',
+            price: 69.90,
+            category: 'Sudaderas',
+            tag: ['abrigadora', 'comodidad']
+        },
+        {
+            id: 9,
+            imgProduct: 'https://images.unsplash.com/photo-1657961940670-5eb629703240?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Blusa de seda',
+            desc: 'Blusa elegante de seda, perfecta para ocasiones especiales.',
+            price: 120.00,
+            category: 'Blusas',
+            tag: ['elegante', 'formal']
+        },
+        {
+            id: 10,
+            imgProduct: 'https://images.unsplash.com/photo-1742518424609-7d6b0b4107b6?q=80&w=1646&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Polo deportivo',
+            desc: 'Polo de tela técnica, ideal para actividades deportivas.',
+            price: 55.90,
+            category: 'Polos',
+            tag: ['deportivo', 'activo']
+        },
+        {
+            id: 11,
+            imgProduct: 'https://images.unsplash.com/photo-1593030103066-0093718efeb9?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Blazer elegante',
+            desc: 'Blazer de corte slim, ideal para ocasiones formales o para dar un toque sofisticado.',
+            price: 119.90,
+            category: 'Camisas',
+            tag: ['formal', 'elegante']
+        },
+        {
+            id: 12,
+            imgProduct: 'https://images.unsplash.com/photo-1594938252461-e42450664907?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+            name: 'Pantalón de vestir',
+            desc: 'Pantalón de vestir de corte moderno, ideal para eventos formales.',
+            price: 89.90,
+            category: 'Pantalones',
+            tag: ['formal', 'elegante']
         }
     ];
 
@@ -62,15 +125,25 @@ export default function ProductsBody() {
         { id: 5, name: 'Sudaderas' }
     ]
 
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
+
+    const [filteredProducts, setFilteredProducts] = useState(products); // Productos filtrados
     const [selectedCategories, setSelectedCategories] = useState([]); // selectedCategories = [] ; setSelectedCategories()
     const [price, setPrice] = useState(249); // price = 249 ; setPrice()
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [selectedProduct, setSelectedProduct] = useState([])
 
-    const openModal = (product) => {
+    const [pagination, setPagination] = useState([])
+    const [currentPage, setCurrentPage] = useState(1); // Add this to track current page
+
+    const openModal = (product) => { // Obtengo el ID del producto al momento de que se hace click en una Card de producto
+        let scrollY = window.pageYOffset
         setIsModalOpen(true)
-        selectProduct(product)
+        selectProduct(product) // Se lo envío a la funcion
+        setTimeout(() => {
+            window.scrollTo(0, scrollY)
+        }, 0);
     }
 
     const closeModdal = () => {
@@ -78,49 +151,87 @@ export default function ProductsBody() {
         setSelectedProduct([])
     }
 
-    const selectProduct = (id) =>{
-        const idProduct = products.find((product) => {
+    const selectProduct = (id) =>{ // Recibo ese id
+        const idProduct = products.find((product) => { // Comparo el id recibido con alguno del array de productos
             return id === product.id ? product : null
         })
-        setSelectedProduct(idProduct);
+        setSelectedProduct(idProduct); // Establezco el valor de "selectedProduct" al valor encontrado
     }
 
     useEffect(() => {
         document.body.style.overflow = isModalOpen ? "hidden" : "auto"
-        document.body.style.paddingRight = isModalOpen ? "15px" : "0px"
     }, [isModalOpen])
 
-    // Esta función es para manejar el cambio de categoría
     const handleCategoryChange = (name, checked) => {
         setSelectedCategories(prev =>
             checked ? [...prev, name] : prev.filter(cat => cat !== name) // ...prev obtiene l
         )
     };
 
-    // Maneja el cambio de precio
     const handlePriceChange = (value) => {
         setPrice(value);
     };
 
-    // Aqui es el filtrado
-    const productosFiltrados = products.filter(product => {
-        // Verifica el precio primero
-        const pasaPrecio = product.price <= price;
-        
-        // Si no hay categorías seleccionadas, muestra todos los productos que pasan el filtro de precio
-        if (selectedCategories.length === 0) {
-            return pasaPrecio;
-        }
+    const changePage = (page) => {
+        setCurrentPage(page);
+    };
 
-        // Verifica si alguna de las etiquetas del producto coincide con las categorías seleccionadas
-        // Normaliza a minúsculas para comparar correctamente
-        const coincideCategorias = selectedCategories.some(cat => 
-            product.category.toLowerCase() === cat.toLowerCase()  
-        );
+    const productsPerPage = 6;
+
+    // Este efecto actualiza la paginación cuando cambia la página o los productos filtrados
+    useEffect(() => {
+        const start = (currentPage - 1) * productsPerPage;
+        const end = currentPage * productsPerPage;
         
-        // El producto debe pasar ambos filtros: precio y categoría
-        return pasaPrecio && coincideCategorias;
-    });
+        const currentProducts = filteredProducts.slice(start, end);
+        setPagination(currentProducts);
+    }, [currentPage, filteredProducts]);
+
+    let searchProducts = () => {
+        const results = products.filter((product) => {
+            const limitPrice = product.price <= price
+            if(search) {
+                // .includes busca coincidencias EXACTAS si se usa en un array, de no ser así, su comportamiento es igual al .some
+                // .some busca si contiene al menos las iniciales
+                if(limitPrice && selectedCategories.includes(product.category) || limitPrice && selectedCategories.length === 0) {
+                    return product.name.toLowerCase().includes(search.trim().toLowerCase())
+                }       
+            }
+        });
+        setFilteredProducts(results);
+    }
+
+    let showAllProducts = () => {
+        const filtered = products.filter(product => {
+            const pasaPrecio = product.price <= price;
+            
+            if (selectedCategories.length === 0) {
+                return pasaPrecio;
+            }
+
+            const coincideCategorias = selectedCategories.some(cat => 
+                product.category.toLowerCase() === cat.toLowerCase()
+            );
+
+            return pasaPrecio && coincideCategorias;
+        });
+        setFilteredProducts(filtered);
+    }
+
+    // Este efecto actualiza los productos filtrados cuando cambian los filtros
+    useEffect(() => {
+        console.log(`ingresaste: ${search.trim()}`)
+        if(search.trim() !== '') {
+            searchProducts();
+        } else {
+            showAllProducts();
+        }
+        console.log(selectedCategories)
+    }, [search, selectedCategories, price]); // Si el valor de selectedCategories o price cambia, ese useEffect se ejecuta!
+
+    const toggleFilter = () => {
+        setIsFilterOpen(prev => !prev)
+    }
 
     return (
         <main id="products-body">
@@ -134,19 +245,30 @@ export default function ProductsBody() {
                     onCategoryChange = {handleCategoryChange}
                     price = {price}
                     onPriceChange = {handlePriceChange}
+                    onFiltersOpen = {toggleFilter}
+                    filters = {isFilterOpen}
                 />
                 <section className="products-section">
-                    <ProductCard products={productosFiltrados} onOpenedModal={openModal} selectedProduct={selectProduct}/>
+                    <div className="top-products">
+                        <button className="filter-btn" onClick={toggleFilter}><img src="../src/assets/img/filter-icon.png" alt="filter-icon" /></button>
+                    </div>
+                    <ProductCard 
+                        products={pagination}
+                        onOpenedModal={openModal}
+                    />
                     <ModalProduct
                         isModalOpened={isModalOpen}
                         closeModal={closeModdal}
                         product = {selectedProduct}
                     />
-                    <Pagination />
+                    <Pagination 
+                        elementsPagination={filteredProducts}
+                        showPage={changePage}
+                        currentPage={currentPage}
+                        productsPerPage={productsPerPage}/>
                 </section>
             </section>
-        </main>
-        // <h1>Echa un vistazo a nuestra colección</h1>
-        
+        </main>        
     )
+
 }
