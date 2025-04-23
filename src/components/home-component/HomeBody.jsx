@@ -9,21 +9,21 @@ function BannerHome() {
             titleBanner: "Estilo Minimalista | Hombres", 
             descBanner: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a obcaecati tempora quibusdam perferendis rem culpa magni. Explicabo possimus eaque, blanditiis iusto odit deserunt vero quia itaque repellat similique nam.",
             imgClass: "model-man-banner",
-            imgModel: "/public/img/model-man-banner.png", 
+            imgModel: "/img/model-man-banner.png", 
             alt: "model-man-img"
         },
         {
             titleBanner: "Estilo Urbano | Mujeres", 
             descBanner: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a obcaecati tempora quibusdam perferendis rem culpa magni. Explicabo possimus eaque, blanditiis iusto odit deserunt vero quia itaque repellat similique nam.",
             imgClass: "model-woman-banner",
-            imgModel: "/public/img/model-woman-banner.png", 
+            imgModel: "/img/model-woman-banner.png", 
             alt: "model-woman-img"
         },
         {
             titleBanner: "Estilo Formal",
             descBanner: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum a obcaecati tempora quibusdam perferendis rem culpa magni. Explicabo possimus eaque, blanditiis iusto odit deserunt vero quia itaque repellat similique nam.",
             imgClass: "another-model-man-banner",
-            imgModel: "/public/img/model-man-banner-2.png", 
+            imgModel: "/img/model-man-banner-2.png", 
             alt: "model-man-img-2"
         }
     ]
@@ -47,7 +47,7 @@ function BannerHome() {
             </div>
             <div className="slider-container">
                 <div className="left-arrow-container">
-                    <button onClick={prevSlide}><img src="/public/img/left-arrow-icon.png" alt="left-arrow-icon" /></button>
+                    <button onClick={prevSlide}><img src="/img/left-arrow-icon.png" alt="left-arrow-icon" /></button>
                 </div>
                 <div className="slider-banner"  style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                     {bannerSlider.map((info, index) => (
@@ -67,7 +67,7 @@ function BannerHome() {
                     ))}
                 </div>
                 <div className="right-arrow-container">
-                    <button onClick={nextSlide}><img src="/public/img/right-arrow-icon.png" alt="right-arrow-icon" /></button>
+                    <button onClick={nextSlide}><img src="/img/right-arrow-icon.png" alt="right-arrow-icon" /></button>
                 </div>
             </div>    
         </section>

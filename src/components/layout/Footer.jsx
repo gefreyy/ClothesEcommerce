@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="footer-top">
         <div className="footer-desc-nav-container">
           <div className="footer-desc">
-            <img src="/public/img/store.png" alt="store-icon" />
+            <img src="/img/store.png" alt="store-icon" />
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque quis assumenda consequatur corrupti aut beatae iste nam corporis, modi ullam harum, mollitia ducimus, velit voluptatem inventore doloribus minima magnam commodi!</p>
           </div>
           <div className="footer-nav">
@@ -26,11 +26,11 @@ export default function Footer() {
               <h3>Comunicate con nosotros</h3>
               <div className="contact">
                 <div className="ways-to-contact">
-                  <img src="/public/img/phone-call-icon.png" alt="phone-call-icon" />
+                  <img src="/img/phone-call-icon.png" alt="phone-call-icon" />
                   <span>+51 999 999 999</span>
                 </div>
                 <div className="ways-to-contact">
-                  <img src="/public/img/email-icon.png" alt="phone-call-icon" /> 
+                  <img src="/img/email-icon.png" alt="phone-call-icon" /> 
                   <span>tienda@gmail.com</span>
                 </div>
               </div>
@@ -40,9 +40,9 @@ export default function Footer() {
       
       <div className="footer-social">
         <div className="social-icons">
-          <a href="#"><img src="/public/img/facebook-icon.png" alt="facebook-icon" /></a>
-          <a href="#"><img src="/public/img/instagram-icon.png" alt="instagram-icon" /></a>
-          <a href="#"><img src="/public/img/tik-tok-icon.png" alt="tik-tok-icon" /></a>
+          <a href="#"><img src="/img/facebook-icon.png" alt="facebook-icon" /></a>
+          <a href="#"><img src="/img/instagram-icon.png" alt="instagram-icon" /></a>
+          <a href="#"><img src="/img/tik-tok-icon.png" alt="tik-tok-icon" /></a>
         </div>
       </div>
       <div className="copyright">
