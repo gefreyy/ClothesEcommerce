@@ -16,9 +16,9 @@ export default function Products() {
 
     return (
         <main>
-            <Header setSearchTerm={setSearchValue}/> {/* TODO: ESTE HACE QUE SE ROMPA EN PANTALLAS PEQUEÑAS */}
+            <Header setSearchTerm={setSearchValue}/>
             <ProductBody search={searchValue}/>
-            <Footer /> {/* TODO: ESTE HACE QUE SE ROMPA EN PANTALLAS PEQUEÑAS */}
+            <Footer />
         </main>
     )
 }

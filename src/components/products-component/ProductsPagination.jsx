@@ -14,7 +14,6 @@ export default function Pagination({elementsPagination, showPage, currentPage, p
                     <button 
                         key={i} 
                         onClick={() => {
-                            console.log("Pagination button clicked:", pageNumber);
                             showPage(pageNumber);
                         }}
                         className={pageNumber === currentPage ? 'active selected' : 'active'}

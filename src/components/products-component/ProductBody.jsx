@@ -157,7 +157,7 @@ export default function ProductsBody({search}) {
     const [selectedProduct, setSelectedProduct] = useState([])
 
     const [pagination, setPagination] = useState([])
-    const [currentPage, setCurrentPage] = useState(1); // Add this to track current page
+    const [currentPage, setCurrentPage] = useState(1);
 
     const prevFiltersRef = useRef({ categories: [], genres: [], price: 249, search: '' });
 
@@ -188,7 +188,6 @@ export default function ProductsBody({search}) {
     const updateURL= () => {
         const queryParams = new URLSearchParams();
     
-        // Use the search prop for the query parameter
         if (search && search.trim()) {
             queryParams.set("q", search.trim());
         }
@@ -202,12 +201,9 @@ export default function ProductsBody({search}) {
         }
 
         queryParams.set("p", currentPage.toString())
-        
-        // queryParams.set("p", price.toString());
-    
+            
         const newUrl = `/products?${queryParams.toString()}`;        
         window.history.replaceState(null, '', newUrl);
-        console.log(prevFiltersRef)
     };
 
     useEffect(() => {
@@ -323,7 +319,6 @@ export default function ProductsBody({search}) {
             }
         });
         setFilteredProducts(results);
-        console.log(results)
         setSearchMessage(true);
         setIsEmpty(results.length === 0);
     }
@@ -349,18 +344,14 @@ export default function ProductsBody({search}) {
         setIsEmpty(filtered.length === 0)
     }
 
-    // console.log(selectedGenres)
-
     // Este efecto actualiza los productos filtrados cuando cambian los filtros
     useEffect(() => {
-        // console.log(`ingresaste: ${search.trim()}`)
         if(search.trim() !== '') {
             searchProducts();
         } else {
             showAllProducts();
         }
 
-        // console.log(selectedCategories)
     }, [search, selectedGenres, selectedCategories, price]); // Si el valor de search, selectedCategories o price cambia, ese useEffect se ejecuta!
 
     const toggleFilter = () => {
