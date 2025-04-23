@@ -46,11 +46,11 @@ export default function Header({setSearchTerm}) {
     return (
         <header id='header-section'>
             
-            <button onClick={toggleMenu} className='hamburguer-button'><img src="../src/assets/img/hamburguer-menu-icon.png" alt="hamburguer-button-icon" /></button>
+            <button onClick={toggleMenu} className='hamburguer-button'><img src="src/assets/img/hamburguer-menu-icon.png" alt="hamburguer-button-icon" /></button>
             <div className={isMenuOpen ? 'lateral-menu open' : 'lateral-menu'}>
                 <div className="menu-top">
                     <h1>Fortnite Shop</h1>
-                    <button className='close-btn' onClick={toggleMenu}><img src="../src/assets/img/close-icon.png" alt="close-icon" /></button>
+                    <button className='close-btn' onClick={toggleMenu}><img src="src/assets/img/close-icon.png" alt="close-icon" /></button>
                 </div>
                 <ul>
                     <li><Link className='home-li link-menu' to="/">Inicio</Link></li>
@@ -60,7 +60,7 @@ export default function Header({setSearchTerm}) {
                 </ul>
             </div>
 
-            <a href="#"><img className='logo-img' src="../src/assets/img/lorem-lorem.svg" alt="logo-shop" /></a>
+            <a href="#"><img className='logo-img' src="src/assets/img/lorem-lorem.svg" alt="logo-shop" /></a>
             <nav className={isSearchOpen ? 'nav-menu show' : 'nav-menu hide'}>
                 <ul>
                 <li>
@@ -72,7 +72,7 @@ export default function Header({setSearchTerm}) {
             </nav>
             <div className="options-icons">
                 <button onClick={toggleSearch} className={isSearchOpen ? 'close-search hide' : 'close-search show'}>×</button>
-                <button onClick={toggleSearch} className={isSearchOpen ? 'button-search show' : 'button-search hide'}><img src="../src/assets/img/search-icon.png" alt="search-icon" /></button>
+                <button onClick={toggleSearch} className={isSearchOpen ? 'button-search show' : 'button-search hide'}><img src="src/assets/img/search-icon.png" alt="search-icon" /></button>
                 <div className={isSearchOpen ? 'search-input hide' : 'search-input show'}>
                     <input 
                         type="text"
@@ -84,8 +84,8 @@ export default function Header({setSearchTerm}) {
                             }
                         }}/>
                 </div>
-                <Link to="/login" className='icon-header'><img src="../src/assets/img/user-icon.png" alt="user-icon" /></Link>
-                <Link href='#' className='icon-header'><img src="../src/assets/img/shopping-cart-icon.png" alt="shopping-cart-icon" /></Link>
+                <Link to="/login" className='icon-header'><img src="src/assets/img/user-icon.png" alt="user-icon" /></Link>
+                <Link href='#' className='icon-header'><img src="src/assets/img/shopping-cart-icon.png" alt="shopping-cart-icon" /></Link>
             </div>
         </header>
     )

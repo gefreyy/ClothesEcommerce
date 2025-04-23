@@ -51,13 +51,13 @@ export default function ContactBody() {
                     <p>Escribenos un mensaje o llamanos, escuchar al cliente es importante para nosotros.</p>
                 </div>
                 <div className="support-img-container">
-                    <img src="./src/assets/img/client-support.jpeg" alt="client-support-img" />
+                    <img src="src/assets/img/client-support.jpeg" alt="client-support-img" />
                 </div>
             </div>
             <section className="ways-to-contact-container">
                 <div className="article-support-container">
                     <article className='phone-number-art'>
-                        <img src="../src/assets/img/phone-call-big-icon.png" alt="phone-icon" />
+                        <img src="src/assets/img/phone-call-big-icon.png" alt="phone-icon" />
                         <h2>Llámanos</h2>
                         <p>Contamos con los siguientes números de teléfono para cada ciudad.</p>
                         <div className="phone-container">
@@ -71,7 +71,7 @@ export default function ContactBody() {
                         <span><strong>Horario de atención:</strong> Lunes a sábado de 9:00am a 6:00pm</span>
                     </article>
                     <article className='email-art'>
-                        <img src="../src/assets/img/chats-icon.png" alt="chats-icon" />
+                        <img src="src/assets/img/chats-icon.png" alt="chats-icon" />
                         <h2>Escribenos</h2>
                         <p>Te contestaremos lo antes posible.</p>
                         <div className="form-container">
@@ -100,7 +100,7 @@ export default function ContactBody() {
                                 <p>{store.location}</p>
                             </div>
                             <div className="pin-img-container">
-                                <img src="../src/assets/img/pin-icon.png" alt="pin-icon" />
+                                <img src="src/assets/img/pin-icon.png" alt="pin-icon" />
                             </div>
                         </article>
                     ))}
