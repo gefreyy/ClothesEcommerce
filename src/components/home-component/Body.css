@@ -201,15 +201,15 @@
 }
 
 .background-img-hombres {
-    background-image: url('/src/assets/img/another-model-dude.png');
+    background-image: url('/public/img/another-model-dude.png');
 }
 
 .background-img-mujeres {
-    background-image: url('/src/assets/img/model-woman.png');
+    background-image: url('/public/img/model-woman.png');
 }
 
 .background-img-ninos {
-    background-image: url('/src/assets/img/model-kid.png');
+    background-image: url('/public/img/model-kid.png');
     background-position-y: -20px;
 }
 
@@ -238,19 +238,19 @@
 }
 
 .desc-art-man:hover {
-    background-image: url('/src/assets/img/another-model-dude-alone.png');
+    background-image: url('/public/img/another-model-dude-alone.png');
     background-position: center;
     background-size: 105%;
 }
 
 .desc-art-woman:hover {
-    background-image: url('/src/assets/img/model-woman-alone.png');
+    background-image: url('/public/img/model-woman-alone.png');
     background-position: center;
     background-size: 155%;
 }
 
 .desc-art-kid:hover {
-    background-image: url('/src/assets/img/model-kid-alone.png');
+    background-image: url('/public/img/model-kid-alone.png');
     background-position: center;    
     background-position-y: -30.5px;
     background-size: 105%;

@@ -69,8 +69,8 @@ export default function LoginBody() {
                     </form>
                     <div className="separator-login"><span>Otras opciones</span></div>
                     <div className="other-login-options">
-                        <button><img src="../src/assets/img/google-icon.webp" alt="google-icon" width="24" height="24"/>Google</button>
-                        <button><img src="../src/assets/img/fb-icon.png" alt="fb-icon" width="24"/>Facebook</button>
+                        <button><img src="/public/img/google-icon.webp" alt="google-icon" width="24" height="24"/>Google</button>
+                        <button><img src="/public/img/fb-icon.png" alt="fb-icon" width="24"/>Facebook</button>
                     </div>
                 </div>
                 <div className='register-text'>
