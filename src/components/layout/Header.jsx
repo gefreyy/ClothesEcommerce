@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { useEffect, useState } from 'react';
 
@@ -8,18 +8,36 @@ export default function Header({setSearchTerm}) {
     // useState permite cambiar el estado de este
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(true)
-    const [localSearchTerm, setLocalSearchTerm] = useState('')
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const searchParameters = new URLSearchParams(location.search)
+    const [localSearchTerm, setLocalSearchTerm] = useState(searchParameters.get('q') || '')
+
+    useEffect(() => {
+        const searchQuery = searchParameters.get('q') || ''
+        setLocalSearchTerm(searchQuery)
+        if(setSearchTerm) {
+            setSearchTerm(searchQuery)
+        }
+    }, [location.search, setSearchTerm])
+
+    const handleSearch = (e) => {
+        if(localSearchTerm.trim()) {
+            // if(setSearchTerm) {
+            //     setSearchTerm(localSearchTerm.trim())
+            // }
+            navigate(`/products?q=${encodeURIComponent(localSearchTerm.trim())}`)
+        } 
+    };
 
     const toggleMenu = () => {
         setIsMenuOpen(prev => !prev)
     };
+
     const toggleSearch = () => {
         setIsSearchOpen(prev => !prev)
     }
-
-    const handleSearch = () => {
-        setSearchTerm(localSearchTerm); // ← Esto envía el texto a Products.jsx
-    };
 
     useEffect(() => {
         document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
@@ -36,7 +54,7 @@ export default function Header({setSearchTerm}) {
                 </div>
                 <ul>
                     <li><Link className='home-li link-menu' to="/">Inicio</Link></li>
-                    <li><Link className='products-li link-menu' to="/products">Productos</Link></li>
+                    <li><a className='products-li link-menu' href="/products">Productos</a></li>
                     <li><Link className='contact-li link-menu' to="/contact">Contacto</Link></li>
                     <li><Link className='about-li link-menu' to="/about-us">Sobre Nosotros</Link></li>
                 </ul>
@@ -47,12 +65,13 @@ export default function Header({setSearchTerm}) {
                 <ul>
                 <li>
                     <Link className='home-li link' to="/">Inicio</Link></li>
-                    <li><Link className='products-li link' to="/products">Productos</Link></li>
+                    <li><a className='products-li link' href="/products">Productos</a></li>
                     <li><Link className='contact-li link' to="/contact">Contacto</Link></li>
                     <li><Link className='about-li link' to="/about-us">Sobre Nosotros</Link></li>
                 </ul>
             </nav>
             <div className="options-icons">
+                <button onClick={toggleSearch} className={isSearchOpen ? 'close-search hide' : 'close-search show'}>×</button>
                 <button onClick={toggleSearch} className={isSearchOpen ? 'button-search show' : 'button-search hide'}><img src="../src/assets/img/search-icon.png" alt="search-icon" /></button>
                 <div className={isSearchOpen ? 'search-input hide' : 'search-input show'}>
                     <input 
@@ -60,13 +79,13 @@ export default function Header({setSearchTerm}) {
                         value={localSearchTerm}
                         onChange={(e) => setLocalSearchTerm(e.target.value)}
                         onKeyDown={(e) => {
-                            if(e.key === 'Enter') {
-                                handleSearch()
+                            if(e.key === 'Enter') {                               
+                                handleSearch();
                             }
                         }}/>
                 </div>
-                <a href="#" className='icon-header'><img src="../src/assets/img/user-icon.png" alt="user-icon" /></a>
-                <a href='#' className='icon-header'><img src="../src/assets/img/shopping-cart-icon.png" alt="shopping-cart-icon" /></a>
+                <Link to="/login" className='icon-header'><img src="../src/assets/img/user-icon.png" alt="user-icon" /></Link>
+                <Link href='#' className='icon-header'><img src="../src/assets/img/shopping-cart-icon.png" alt="shopping-cart-icon" /></Link>
             </div>
         </header>
     )

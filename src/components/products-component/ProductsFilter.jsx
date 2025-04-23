@@ -1,4 +1,7 @@
 export default function ProductFilters({
+    genres,
+    selectedGenre,
+    onSelectedGender,
     categories,
     selectedCategories, 
     onCategoryChange, 
@@ -11,6 +14,19 @@ export default function ProductFilters({
             <div className="products-filters">
                 <h3>Filtros</h3>
                 <div className="filters-container">
+                    {genres.map((genre, index) => (
+                        <div className="filter-item" key={index}>
+                        <input 
+                            type="checkbox" 
+                            id={genre.id} 
+                            name={genre.name}
+                            checked={selectedGenre.includes(genre.name)}
+                            onChange={(e) => onSelectedGender(genre.name, e.target.checked)} /* paso el nombre y el target marcado*/
+                        ></input>
+                        <label htmlFor={genre.id}>{genre.name}</label>
+                    </div>
+                    ))}
+                    <hr className="separator-filter"/>
                     {categories.map((category, index) => (
                         <div className="filter-item" key={index}>
                             <input 

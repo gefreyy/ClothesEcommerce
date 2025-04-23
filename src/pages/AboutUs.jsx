@@ -1,12 +1,12 @@
-import ContactBody from "../components/contact-component/ContactBody";
+import AboutUsBody from "../components/about-us-component/AboutUsBody";
 import Footer from "../components/layout/Footer";
 import Header from "../components/layout/Header";
 
-export default function Contact() {
+export default function AboutUs() {
     return (
         <main>
             <Header />
-            <ContactBody />
+            <AboutUsBody />
             <Footer />
         </main>
     )

@@ -1,0 +1,238 @@
+#login-body {
+    width: 100%;
+    min-height: 100dvh;
+    display: flex;
+    font-family: "Lora", serif;
+}
+
+.login-card-container {
+    position: relative;
+    width: 50%;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.back-to-home {
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    font-size: clamp(.8rem, 1.8vw, 1rem);
+}
+
+.back-to-home:hover {
+    text-decoration: underline;
+    color: rgba(0, 0, 0, 0.644);
+}
+
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    /* transform: scale(1.1); */
+}
+
+.login-top-text > h1 {
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    text-align: center;
+    font-weight: 500;
+}
+
+.login-top-text > p {
+    font-size: clamp(.6rem, 1vw, 1rem);
+    text-align: center;
+    color: rgb(117, 117, 117);
+    font-weight: 400;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 1rem;
+}
+
+.email-container, .password-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.email-container > input, .pass-input-container > input {
+    padding: .6rem;
+    font-family: "Poppins", sans-serif;
+    border: 1px solid rgba(0, 0, 0, 0.11);
+    width: 100%;
+}
+
+.email-container > label, .password-container > label {
+    font-size: clamp(.8rem, 1.8vw, 1rem);
+}
+
+.pass-input-container {
+    position: relative;
+}
+
+.btn-hide-pass {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 2.5%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.507);
+    z-index: 5;
+    padding: 5px;
+}
+
+.hidden {
+    opacity: 0;
+}
+  
+.visible {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.login-form > a {
+    text-decoration: none;
+    color: rgb(165, 60, 165);
+    width: fit-content;
+    font-weight: 500;
+    transition: all .3s ease;
+    font-size: clamp(.8rem, 1.5vw, 1rem);
+}
+
+.login-form > a:hover {
+    color: rgba(165, 60, 165, 0.664);
+    text-decoration: underline;
+}
+
+.login-form > button {
+    border: none;
+    padding: .6rem;
+    background-color: rgb(250, 250, 152);
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    transition: all .3s ease;
+}
+
+.login-form > button:hover {
+    background-color: rgba(255, 255, 105, 0.452);
+}
+
+.separator-login {
+    position: relative;
+    display: block;
+    width: 56%;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #0000002c;
+    margin: 1rem 0;
+    z-index: -1;
+}
+
+.separator-login > span {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);    
+    background-color: white;
+    color: black;
+    z-index: 1;
+    padding: 1rem;
+    font-size: clamp(.6rem, 1vw, 1rem);
+}
+
+.other-login-options {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.other-login-options > button {
+    width: 50%;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: .5rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.other-login-options > button:hover {
+    background: rgba(0, 0, 0, 0.075);
+}
+
+.register-text {
+    position: absolute;
+    bottom: 1%;
+    font-size: clamp(.8rem, 1.2vw, 1rem);
+}
+
+.register-text > span > a {
+    text-decoration: none;
+    font-weight: 500;
+    color: rgb(122, 104, 0);
+    transition: all .3s ease;
+}
+
+.register-text > span > a:hover {
+    color: rgba(122, 104, 0, 0.582);
+    text-decoration: underline;
+}
+
+#login-body > img {
+    width: 50%;
+    height: 100dvh;
+    object-fit: cover;
+    aspect-ratio: 9/16;
+    -webkit-user-drag: none;
+}
+
+
+@media (max-width: 950px) {
+    #login-body > img {
+        display: none;
+    }
+
+    .login-card-container {
+        flex: 1;
+    }
+}
+
+@media (max-width: 550px) {
+    .login-form {
+        width: 80%;
+    }
+
+    .separator-login {
+        width: 85%;
+    }
+}
+
+@media (max-width: 420px) {
+    .other-login-options {
+        gap: 0
+    }
+}

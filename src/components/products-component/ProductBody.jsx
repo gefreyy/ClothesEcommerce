@@ -2,8 +2,9 @@ import ProductFilters from "./ProductsFilter.jsx"
 import ProductCard from "./ProductsCard.jsx"
 import "./ProductBody.css"
 import Pagination from "./ProductsPagination.jsx"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import ModalProduct from "./ProductModal.jsx"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export default function ProductsBody({search}) {
     const products = [
@@ -13,6 +14,7 @@ export default function ProductsBody({search}) {
             name: 'Polo del algodón',
             price: 39.90,
             desc: 'Polo suave al tacto, hecho 100% de algodón ideal para looks frescos y casuales.',
+            sex: 'Masculino',
             category: 'Polos',
             tag: ['minimalista']
         },
@@ -22,6 +24,7 @@ export default function ProductsBody({search}) {
             name: 'Blusa',
             desc: 'Blusa ligera y elegante, perfecta para complementar tu outfit con estilo y comodidad.',
             price: 45.90,
+            sex: 'Femenino',
             category: 'Blusas',
             tag: ['tops']
         },
@@ -31,6 +34,7 @@ export default function ProductsBody({search}) {
             name: 'Polo oversize',
             desc: 'Estilo urbano y cómodo con este polo oversize que marca tendencia.',
             price: 49.20,
+            sex: 'Unisex',
             category: 'Polos',
             tag: ['oversize', 'urbano']
         },
@@ -40,6 +44,7 @@ export default function ProductsBody({search}) {
             name: 'Jean',
             desc: 'Jean clásico de corte recto, ideal para cualquier ocasión y combinable con todo.',
             price: 89.90,
+            sex: 'Femenino',
             category: 'Pantalones',
             tag: ['clásico']
         },
@@ -49,6 +54,7 @@ export default function ProductsBody({search}) {
             name: 'Sudadera',
             desc: 'Sudadera con diseño minimalista y tela abrigadora, perfecta para días fríos.',
             price: 99.90,
+            sex: 'Unisex',
             category: 'Sudaderas',
             tag: ['minimalista']
         },
@@ -58,6 +64,7 @@ export default function ProductsBody({search}) {
             name: 'Camisa de cuadros',
             desc: 'Camisa de cuadros, perfecta para looks casuales y elegantes.',
             price: 59.90,
+            sex: 'Masculino',
             category: 'Camisas',
             tag: ['casual', 'elegante']
         },
@@ -67,6 +74,7 @@ export default function ProductsBody({search}) {
             name: 'Pantalón cargo',
             desc: 'Pantalón de estilo cargo, cómodo y práctico para el día a día.',
             price: 79.90,
+            sex: 'Unisex',
             category: 'Pantalones',
             tag: ['cargo', 'casual']
         },
@@ -76,6 +84,7 @@ export default function ProductsBody({search}) {
             name: 'Sudadera con capucha',
             desc: 'Sudadera abrigadora con capucha, ideal para días fríos.',
             price: 69.90,
+            sex: 'Masculino',
             category: 'Sudaderas',
             tag: ['abrigadora', 'comodidad']
         },
@@ -85,6 +94,7 @@ export default function ProductsBody({search}) {
             name: 'Blusa de seda',
             desc: 'Blusa elegante de seda, perfecta para ocasiones especiales.',
             price: 120.00,
+            sex: 'Femenino',
             category: 'Blusas',
             tag: ['elegante', 'formal']
         },
@@ -94,6 +104,7 @@ export default function ProductsBody({search}) {
             name: 'Polo deportivo',
             desc: 'Polo de tela técnica, ideal para actividades deportivas.',
             price: 55.90,
+            sex: 'Masculino',
             category: 'Polos',
             tag: ['deportivo', 'activo']
         },
@@ -103,6 +114,7 @@ export default function ProductsBody({search}) {
             name: 'Blazer elegante',
             desc: 'Blazer de corte slim, ideal para ocasiones formales o para dar un toque sofisticado.',
             price: 119.90,
+            sex: 'Masculino',
             category: 'Camisas',
             tag: ['formal', 'elegante']
         },
@@ -112,22 +124,32 @@ export default function ProductsBody({search}) {
             name: 'Pantalón de vestir',
             desc: 'Pantalón de vestir de corte moderno, ideal para eventos formales.',
             price: 89.90,
+            sex: 'Masculino',
             category: 'Pantalones',
             tag: ['formal', 'elegante']
         }
     ];
 
-    const categories = [
-        { id: 1, name: 'Polos' },
-        { id: 2, name: 'Blusas'},
-        { id: 3, name: 'Camisas' },
-        { id: 4, name: 'Pantalones' },
-        { id: 5, name: 'Sudaderas' }
-    ]
+    const genres = [
+        { id: 'genre-1', name: 'Masculino'},
+        { id: 'genre-2', name: 'Femenino'},
+        { id: 'genre-3', name: 'Unisex'}
+    ];
 
+    const categories = [
+        { id: 'cat-1', name: 'Polos' },
+        { id: 'cat-2', name: 'Blusas'},
+        { id: 'cat-3', name: 'Camisas' },
+        { id: 'cat-4', name: 'Pantalones' },
+        { id: 'cat-5', name: 'Sudaderas' }
+    ];
+
+    const [searchMessage, setSearchMessage] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(false)
 
     const [filteredProducts, setFilteredProducts] = useState(products); // Productos filtrados
+    const [selectedGenres, setSelectedGenres] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([]); // selectedCategories = [] ; setSelectedCategories()
     const [price, setPrice] = useState(249); // price = 249 ; setPrice()
 
@@ -136,6 +158,87 @@ export default function ProductsBody({search}) {
 
     const [pagination, setPagination] = useState([])
     const [currentPage, setCurrentPage] = useState(1); // Add this to track current page
+
+    const prevFiltersRef = useRef({ categories: [], genres: [], price: 249, search: '' });
+
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const genero = params.get("g");
+        const categoria = params.get("c");
+        const pagina = parseInt(params.get("p")) || 1;
+        const query = params.get("q");
+
+        if (genero) {
+            setSelectedGenres(genero.split(","));
+        }
+
+        if (categoria) {
+            setSelectedCategories(categoria.split(","));
+        }
+
+        if (query) {
+            setSearch(query);
+        }
+
+        setCurrentPage(pagina);
+    }, []);
+
+    const updateURL= () => {
+        const queryParams = new URLSearchParams();
+    
+        // Use the search prop for the query parameter
+        if (search && search.trim()) {
+            queryParams.set("q", search.trim());
+        }
+    
+        if (selectedCategories.length > 0) {
+            queryParams.set("c", selectedCategories.join(","));
+        }
+    
+        if (selectedGenres.length > 0) {
+            queryParams.set("g", selectedGenres.join(","));
+        }
+
+        queryParams.set("p", currentPage.toString())
+        
+        // queryParams.set("p", price.toString());
+    
+        const newUrl = `/products?${queryParams.toString()}`;        
+        window.history.replaceState(null, '', newUrl);
+        console.log(prevFiltersRef)
+    };
+
+    useEffect(() => {
+        const currentFilters = {
+            categories: selectedCategories,
+            genres: selectedGenres,
+            page: currentPage,
+            price: price,
+            search: search || ''
+        };
+        
+        const prevFilters = prevFiltersRef.current;
+        const categoriesChanged = JSON.stringify(prevFilters.categories) !== JSON.stringify(currentFilters.categories);
+        const genresChanged = JSON.stringify(prevFilters.genres) !== JSON.stringify(currentFilters.genres);
+        const priceChanged = prevFilters.price !== currentFilters.price;
+        const searchChanged = prevFilters.search !== currentFilters.search;
+
+        const filtersChanged = categoriesChanged || genresChanged || priceChanged || searchChanged;
+
+        if (filtersChanged && currentPage !== 1) {
+            setCurrentPage(1);
+            return;
+        }
+        
+        const pageChanged = prevFilters.page !== currentFilters.page;
+
+        if (filtersChanged || pageChanged) {
+            updateURL();
+            prevFiltersRef.current = currentFilters;
+        }
+    }, [selectedCategories, selectedGenres, price, search, currentPage]);
 
     const openModal = (product) => { // Obtengo el ID del producto al momento de que se hace click en una Card de producto
         let scrollY = window.pageYOffset
@@ -162,10 +265,25 @@ export default function ProductsBody({search}) {
         document.body.style.overflow = isModalOpen ? "hidden" : "auto"
     }, [isModalOpen])
 
+    // Va guardando lo seleccionado en un array.
     const handleCategoryChange = (name, checked) => {
-        setSelectedCategories(prev =>
-            checked ? [...prev, name] : prev.filter(cat => cat !== name) // ...prev obtiene l
-        )
+        setSelectedCategories(prev =>{
+            const newCategories = checked ? 
+                [...prev, name] : 
+                prev.filter(cat => cat !== name);
+            
+            return newCategories;
+        })
+    };
+
+    const handleGenreChange = (name, checked) => {
+        setSelectedGenres(prev => {
+            const newGenres = checked ?
+                [...prev, name] :
+                prev.filter(gen => gen !== name);
+            
+            return newGenres;
+        })
     };
 
     const handlePriceChange = (value) => {
@@ -190,44 +308,60 @@ export default function ProductsBody({search}) {
     let searchProducts = () => {
         const results = products.filter((product) => {
             const limitPrice = product.price <= price
+            const coincideSexo = selectedGenres.length === 0 || 
+                selectedGenres.includes(product.sex);
+            
+            const coincideCategoria = selectedCategories.length === 0 || 
+                selectedCategories.includes(product.category);
+
             if(search) {
                 // .includes busca coincidencias EXACTAS si se usa en un array, de no ser así, su comportamiento es igual al .some
                 // .some busca si contiene al menos las iniciales
-                if(limitPrice && selectedCategories.includes(product.category) || limitPrice && selectedCategories.length === 0) {
+                if(limitPrice && coincideSexo && coincideCategoria) {
                     return product.name.toLowerCase().includes(search.trim().toLowerCase())
-                }       
+                }
             }
         });
         setFilteredProducts(results);
+        console.log(results)
+        setSearchMessage(true);
+        setIsEmpty(results.length === 0);
     }
 
     let showAllProducts = () => {
         const filtered = products.filter(product => {
             const pasaPrecio = product.price <= price;
             
-            if (selectedCategories.length === 0) {
+            if(selectedCategories.length === 0 && selectedGenres.length === 0) {
                 return pasaPrecio;
             }
-
-            const coincideCategorias = selectedCategories.some(cat => 
-                product.category.toLowerCase() === cat.toLowerCase()
-            );
-
-            return pasaPrecio && coincideCategorias;
+            
+            const coincideSexo = selectedGenres.length === 0 || 
+                selectedGenres.includes(product.sex);
+            
+            const coincideCategoria = selectedCategories.length === 0 || 
+                selectedCategories.includes(product.category);
+            
+            return pasaPrecio && coincideSexo && coincideCategoria;
         });
         setFilteredProducts(filtered);
+        setSearchMessage(false)
+        setIsEmpty(filtered.length === 0)
     }
+
+    // console.log(selectedGenres)
 
     // Este efecto actualiza los productos filtrados cuando cambian los filtros
     useEffect(() => {
-        console.log(`ingresaste: ${search.trim()}`)
+        // console.log(`ingresaste: ${search.trim()}`)
         if(search.trim() !== '') {
             searchProducts();
         } else {
             showAllProducts();
         }
-        console.log(selectedCategories)
-    }, [search, selectedCategories, price]); // Si el valor de selectedCategories o price cambia, ese useEffect se ejecuta!
+
+        // console.log(selectedCategories)
+    }, [search, selectedGenres, selectedCategories, price]); // Si el valor de search, selectedCategories o price cambia, ese useEffect se ejecuta!
 
     const toggleFilter = () => {
         setIsFilterOpen(prev => !prev)
@@ -235,11 +369,21 @@ export default function ProductsBody({search}) {
 
     return (
         <main id="products-body">
-            <h1>Toda la ropa en un solo lugar.</h1>
-            <p>Echa un vistazo a nuestra colección</p>
-            <hr />
+            <div className="products-header-container">
+                <div className="products-top-text-container">
+                    <h1>Toda la ropa en un solo lugar.</h1>
+                    <p>Echa un vistazo a nuestra colección</p>
+                </div>
+                <div className={searchMessage ? "products-search-container show" : "products-search-container hide"}>
+                    <p>Resultados para: "<strong>{search}</strong>"</p>
+                </div>
+            </div>
+            <hr  className="separator"/>
             <section className="products-body-container">
                 <ProductFilters
+                    genres = {genres}
+                    selectedGenre = {selectedGenres}
+                    onSelectedGender = {handleGenreChange}
                     categories = {categories}
                     selectedCategories = {selectedCategories}
                     onCategoryChange = {handleCategoryChange}
@@ -255,6 +399,7 @@ export default function ProductsBody({search}) {
                     <ProductCard 
                         products={pagination}
                         onOpenedModal={openModal}
+                        noProducts={isEmpty}
                     />
                     <ModalProduct
                         isModalOpened={isModalOpen}

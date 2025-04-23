@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700');
+
+#about-us-body {
+    width: 100%;
+    padding: 2rem 4rem;
+    min-height: 100dvh;
+    font-family: "Lora", serif;
+}
+
+.floating-header-container {
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.055);
+    padding: 1rem;
+}
+
+.floating-header-container > h1 {
+    font-size: clamp(1rem, 14vw, 15rem);
+    width: 40%;
+    font-weight: 100;
+}
+
+.floating-header-container > img {
+    max-width: 80%;
+    max-height: 40rem;
+    position: absolute;
+    top: 25%;
+    right: 0;
+    z-index: -1;
+    transform: scaleX(-1);
+}
+
+.floating-header-container > p {
+    font-family: "Lora", serif;
+    font-size: clamp(.6rem, 1.2vw, 1.2rem);
+    width: 50%;
+    background-color: white;
+}
+
+.mission-vision-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/*------------------------------- Mission Section ---------------------------------*/
+
+.our-mission-container {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.our-mission-container > h1 {
+    width: fit-content;
+    font-size: clamp(.8rem, 4vw, 4rem);
+    font-weight: 500;
+}
+
+.left-side {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.left-side > img {
+    max-width: 40%;
+}
+
+.left-side > p {
+    font-size: clamp(.6rem, 1.5vw, 2rem);
+}
+
+/*------------------------------- Vision Section ---------------------------------*/
+
+.our-vision-container {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.our-vision-container > h1 {
+    font-size: clamp(.8rem, 4vw, 4rem);
+    font-weight: 500;
+    text-align: end;
+}
+
+.right-side {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+}
+
+.right-side > img {
+    max-width: 40%;
+}
+
+.right-side > p {
+    font-size: clamp(.6rem, 1.5vw, 2rem);
+}
+
+@media (max-width: 550px) {
+    #about-us-body {
+        padding: .5rem;
+    }
+}

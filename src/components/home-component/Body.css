@@ -48,6 +48,20 @@
     z-index: 3;
 }
 
+.left-arrow-container > button, .right-arrow-container > button {
+    display: flex;
+    border: 1px solid rgb(223, 223, 223);
+    border-radius: 50%;
+    background-color: white;
+    padding: .3rem;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.left-arrow-container > button:hover, .right-arrow-container > button:hover {
+    background-color: rgb(221, 221, 221);
+}
+
 .yapping button {
     display: flex;
     justify-content: center;
@@ -150,7 +164,7 @@
     left: -66.5%;
 }
 
-hr {
+.separator {
     margin: 2rem;
     border: 0;
     border-top: 1px solid #00000025;

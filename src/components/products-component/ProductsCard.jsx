@@ -1,6 +1,6 @@
 import AddToCart from "./AddProduct";
 
-export default function ProductCard({products, onOpenedModal}) {
+export default function ProductCard({products, onOpenedModal, noProducts}) {
     return (
         <div className="products-card-container">
             { products.map((product, index) => (
@@ -15,6 +15,9 @@ export default function ProductCard({products, onOpenedModal}) {
                     </article>
                 </a>
             ))}
+            <div className={noProducts ? "no-products show" : "no-products hide"}>
+                <h1>No hay productos que mostrar!</h1>
+            </div>
         </div>
     )
 }

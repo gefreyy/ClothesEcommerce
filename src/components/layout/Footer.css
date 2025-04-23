@@ -95,3 +95,31 @@
     text-align: center;
 }
 
+@media (max-width: 600px) {
+    .footer-desc {
+        display: none;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer-top {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap-reverse;
+        gap: 1rem;
+    }
+
+    .footer-desc-nav-container {
+        text-align: center;
+    }
+
+    .footer-contact, .footer-contact-us-section {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact {
+        text-align: center;
+    }
+}

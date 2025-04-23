@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Body.css'
 import { useState } from 'react';
 
@@ -55,7 +56,7 @@ function BannerHome() {
                                 <div className="yapping">
                                     <h1>{info.titleBanner}</h1>
                                     <p>{info.descBanner}</p>
-                                    <a href="#">Comprar</a>
+                                    <a href="#">Explorar</a>
                                 </div>
                                 <div className="image-model">
                                     <img className={info.imgClass} src={info.imgModel} alt={info.alt} />
@@ -76,20 +77,20 @@ function BannerHome() {
 function CategoryHome() {
 
     const categories = [
-        { descArt: 'desc-art-man', name: "Moda para hombres", link: "#", imgClass: "background-img-hombres" },
-        { descArt: 'desc-art-woman', name: "Moda para mujeres", link: "#", imgClass: "background-img-mujeres" },
-        { descArt: 'desc-art-kid', name: "Moda para niños", link: "#", imgClass: "background-img-ninos" }
+        { descArt: 'desc-art-man', name: "Moda para hombres", link: "/products?g=Masculino&p=1", imgClass: "background-img-hombres" },
+        { descArt: 'desc-art-woman', name: "Moda para mujeres", link: "/products?g=Femenino&p=1", imgClass: "background-img-mujeres" },
+        { descArt: 'desc-art-kid', name: "Moda para niños", link: "/products?g=Unisex&p=1", imgClass: "background-img-ninos" }
     ];
 
     return (
         <section id='category-home-section'>
             {categories.map((category, index) => (
-                <a className='category-link' href={category.link} key={index}>
+                <Link className='category-link' to={category.link} key={index} onClick={() => window.scrollTo(0, 0)}>
                     <article className='category-home-card'>
                         <div className={category.imgClass}></div>
                         <p className={category.descArt}>{category.name}</p>
                     </article>
-                </a>
+                </Link>
             ))}
         </section>
     );
@@ -99,9 +100,9 @@ export default function HomeBody() {
     return (
         <main>
             <BannerHome />
-            <hr />
+            <hr className='separator' />
             <CategoryHome />
-            <hr />
+            <hr className='separator'/>
         </main>
     );
 }
