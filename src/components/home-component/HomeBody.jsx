@@ -56,7 +56,7 @@ function BannerHome() {
                                 <div className="yapping">
                                     <h1>{info.titleBanner}</h1>
                                     <p>{info.descBanner}</p>
-                                    <a href="#">Explorar</a>
+                                    <Link to="/products?p=1">Explorar</Link>
                                 </div>
                                 <div className="image-model">
                                     <img className={info.imgClass} src={info.imgModel} alt={info.alt} />
@@ -77,21 +77,24 @@ function BannerHome() {
 function CategoryHome() {
 
     const categories = [
-        { descArt: 'desc-art-man', name: "Moda para hombres", link: "/products?g=Masculino&p=1", imgClass: "background-img-hombres" },
-        { descArt: 'desc-art-woman', name: "Moda para mujeres", link: "/products?g=Femenino&p=1", imgClass: "background-img-mujeres" },
-        { descArt: 'desc-art-kid', name: "Moda para niños", link: "/products?g=Unisex&p=1", imgClass: "background-img-ninos" }
+        { descArt: 'desc-art-man', name: "Moda para hombres", link: "/products?p=1&gender=Masculino", imgClass: "background-img-hombres" },
+        { descArt: 'desc-art-woman', name: "Moda para mujeres", link: "/products?p=1&gender=Femenino", imgClass: "background-img-mujeres" },
+        { descArt: 'desc-art-kid', name: "Moda Unisex", link: "/products?p=1&gender=Unisex", imgClass: "background-img-ninos" }
     ];
 
     return (
         <section id='category-home-section'>
-            {categories.map((category, index) => (
-                <Link className='category-link' to={category.link} key={index} onClick={() => window.scrollTo(0, 0)}>
-                    <article className='category-home-card'>
-                        <div className={category.imgClass}></div>
-                        <p className={category.descArt}>{category.name}</p>
-                    </article>
-                </Link>
-            ))}
+            <h2>Descubre nuestras categorías</h2>
+            <div className="categories-container">
+                {categories.map((category, index) => (
+                    <Link className='category-link' to={category.link} key={index} onClick={() => window.scrollTo(0, 0)}>
+                        <article className='category-home-card'>
+                            <div className={category.imgClass}></div>
+                            <p className={category.descArt}>{category.name}</p>
+                        </article>
+                    </Link>
+                ))}
+            </div>
         </section>
     );
 }

@@ -1,5 +1,8 @@
-export default function AddToCart() {
+
+export default function AddToCart({product, addToCart}) {
+    // console.log(addToCart)
+    // console.log(product)
     return(
-        <button className="product-card-button">Agregar al carrito</button>
+        <button className="product-card-button" onClick={() => addToCart(product) }>Agregar al carrito</button>
     )
 }

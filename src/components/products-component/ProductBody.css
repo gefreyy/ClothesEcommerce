@@ -57,6 +57,14 @@ body {
     position: relative;
 }
 
+.search-text {
+    display: none;
+}
+
+.search-text.show {
+    display: block;
+}
+
 .filter-btn {
     opacity: 0;
     visibility: hidden;
@@ -161,11 +169,16 @@ body {
     margin: .5rem 0;
 }
 
+.general-info-product-card {
+    cursor: pointer;
+}
+
 .product-card-name {
     font-weight: 550;
 }
 
 .product-card-button {
+    width: 100%;
     padding: .8rem;
     border: none;
     background-color: rgb(255, 255, 144);
@@ -278,11 +291,86 @@ body {
 .modal-info-container {
     position: relative;
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.modal-info-container > h1 {
+.text-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.title-and-brand > h1 {
     font-weight: 500;
     font-size: clamp(.8rem, 4vw, 3rem);
+}
+
+.title-and-brand > h2 {
+    font-weight: 500;
+    font-size: clamp(.6rem, 3vw, 1.5rem);
+}
+
+.rating-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: .3rem;
+}
+
+.stars-rating-container {
+    display: flex;
+}
+
+.stars-rating-container > button {
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.stars-rating-container > button > svg {
+    width: 20px;
+}
+
+.stock-and-price-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stock-and-price-container > h3 {
+    font-weight: 500;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+}
+
+.size-and-color-general-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    flex: 1;
+    justify-content: center;
+    align-items: start;
+}
+
+.size-btn, .color-btn {
+    padding: .8rem 0;
+    border: none;
+    background-color: rgba(189, 189, 189, 0.26);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    outline: none;
+    margin-top: .5rem;
+    width: 6rem;
+    height: 2.5rem;
+}
+
+.size-btn:not(:last-child), .color-btn:not(:last-child) {
+    margin-right: 12px;
+}
+
+.size-btn:hover {
+    background-color: rgba(189, 189, 189, 0.5);
 }
 
 .close-btn {

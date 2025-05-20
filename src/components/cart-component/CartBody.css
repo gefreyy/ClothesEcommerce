@@ -1,0 +1,188 @@
+#cart-body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100dvh;
+    padding: 1rem;
+}
+
+.general-info-cart-section {
+    display: flex;
+}
+
+.cart-body-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.title-cart > h1{
+    font-weight: 400;
+}
+
+.title-cart > p{
+    font-weight: 500;
+}
+
+.actions-cart {
+    min-height: 60px;
+    display: flex;
+    gap: 1rem;
+}
+
+.vaciar-btn {
+    background: #ff2323;
+    color: white;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+    font-weight: 600;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.continuar-btn {
+    background: #000000;
+    color: white;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+    font-weight: 600;
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.continuar-btn:hover {
+    background: #000000c0;
+}
+
+.vaciar-btn:hover {
+    background: #ff2323c0;
+}
+
+#cart-table {
+    width: 70%;
+}
+
+td, th {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.185);
+}
+
+td:not(:first-child) {
+    vertical-align: top;
+    text-align: center;
+}
+
+th:first-child {
+    text-align: start;
+}
+
+th:not(:first-child) {
+    text-align: center;
+    font-weight: 600;
+}
+
+th, td {
+    width: 25%;
+    padding: .5rem;
+    flex: 1;
+}
+
+.price-container {
+    width: 30%;
+}
+
+.price-container > button {
+    width: 100%;
+    background: #000000;
+    color: white;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.price-container > button:hover {
+    background: #000000c0;
+}
+
+.product-cell {
+    width: max-content;
+    display: flex;
+    gap: 1rem;
+}
+
+.product-cell > img {
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+}
+
+.product-aside-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .5rem;
+}
+
+.delete-single-prod {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.delete-item-btn {
+    background: none;
+    color: #ff2323;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    transition: all .3s ease-in-out;
+    margin-bottom: .5rem;
+}
+
+.delete-item-btn:hover {
+    color: #ff0000c0;
+}
+
+.quantity-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+}
+
+.quantity-container > button {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    color: white;
+    font-size: clamp(.6rem, 1.8vw, 1rem);
+    border: none;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    transition: all .3s ease-in-out;
+}
+
+.quantity-container > button:hover {
+    background: #000000c0;
+}
+
+.quantity-container > p {
+    width: 25px;
+}

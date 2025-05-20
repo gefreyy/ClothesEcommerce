@@ -151,17 +151,20 @@
 }
 
 .model-man-banner {
-    left: -32%;
+    left: -5%;
+    width: 530px;
 }
 
 .model-woman-banner {
-    top: -180px;
-    left: -32%;
+    top: -120px;
+    left: -5%;
+    width: 630px;
 }
 
 .another-model-man-banner {
     top: -80px;
-    left: -66.5%;
+    left: 0;
+    width: 530px;
 }
 
 .separator {
@@ -171,6 +174,17 @@
 }
 
 #category-home-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    gap: 1.5rem;
+}
+
+.categories-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -209,7 +223,7 @@
 }
 
 .background-img-ninos {
-    background-image: url('/public/img/model-kid.png');
+    background-image: url('/public/img/unisex-img.jpg');
     background-position-y: -20px;
 }
 
@@ -250,7 +264,7 @@
 }
 
 .desc-art-kid:hover {
-    background-image: url('/public/img/model-kid-alone.png');
+    background-image: url('/public/img/unisex-img.jpg');
     background-position: center;    
     background-position-y: -30.5px;
     background-size: 105%;

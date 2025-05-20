@@ -1,27 +1,25 @@
-export default function Pagination({elementsPagination, showPage, currentPage, productsPerPage}) {
-    const totalPages = Math.ceil(elementsPagination.length / productsPerPage);
+export default function Pagination({selectedPage, currentPage, listPages}) {
+    let pageNumbers = [];
 
-    if (totalPages <= 1) {
-        return null;
+    for(let i = 1; i <= listPages; i++) {
+        pageNumbers.push(i);
     }
 
-    return(
-        <div className="pagination-section">
-            {Array.from({ length: totalPages }).map((_, i) => {
-                const pageNumber = i + 1;
-
-                return (
+    if (pageNumbers.length < 1) {
+        return null;
+    } else {
+        return(
+            <div className="pagination-section">
+                {pageNumbers.map((pageNumber) => (
                     <button 
-                        key={i} 
-                        onClick={() => {
-                            showPage(pageNumber);
-                        }}
-                        className={pageNumber === currentPage ? 'active selected' : 'active'}
+                        key={pageNumber} 
+                        onClick={() => { selectedPage(pageNumber); }}
+                        className={parseInt(currentPage) === pageNumber ? 'active selected' : 'active'}
                     >
                         {pageNumber}
                     </button>
-                );
-            })}
-        </div>
-    );
+                ))}
+            </div>
+        );   
+    }
 }
