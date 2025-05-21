@@ -1,17 +1,5 @@
-<<<<<<< HEAD
-# React + Vite
+### ⚠️ Aviso sobre el rendimiento / Performance Notice
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**ES:** Este proyecto utiliza servicios gratuitos para alojar tanto el backend (Render) como la base de datos (FreeSQLDatabase), por lo que el tiempo de respuesta puede ser lento, especialmente en la primera solicitud o si el servidor entra en reposo. ¡Gracias por tu comprensión!
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-=======
-# ClothesEcommerce
-A clothes ecommerce made with React
->>>>>>> 35c85884fdaaf74652105d10fe105b7fa1de0215
+**EN:** This project uses free services to host both the backend (Render) and the database (FreeSQLDatabase), so response times may be slow—especially on the first request or if the server is sleeping. Thanks for your understanding!
