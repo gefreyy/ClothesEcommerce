@@ -77,8 +77,6 @@ export default function ProductFilters({
     const categoriasSeleccionadas = searchParams.getAll('category');
     const marcasSeleccionadas = searchParams.getAll('brand');
 
-    console.log()
-
     return (
         <aside className={isFilterOpen ? 'products-filters-container open' : 'products-filters-container'}>
             <div className="products-filters">

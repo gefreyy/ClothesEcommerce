@@ -12,9 +12,9 @@ export default function ProductsBody({search}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const page = searchParams.get('p') || 1; // Esto obtiene lo que viene luego de ?p= !!!!
     const query = searchParams.get('q'); // Esto obtiene lo que viene luego de ?q= !!!!
-    const gender = searchParams.get('gender') || '';
-    const brand = searchParams.get('brand') || '';
-    const category = searchParams.get('category') || '';
+    const gender = searchParams.getAll('gender') || '';
+    const brand = searchParams.getAll('brand') || '';
+    const category = searchParams.getAll('category') || '';
 
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isFilterOpen, setIsFilterOpen] = useState(false)
@@ -29,8 +29,6 @@ export default function ProductsBody({search}) {
     const [listProducts, setListProducts] = useState([]);
     const [listPages, setListPages] = useState([]);
     const [modalInfo, setModalInfo] = useState([]);
-
-    localStorage.setItem('selectedFilters', JSON.stringify(selectedFilters))
 
     const updateSearchParams = (newPage) => {
         const nuevoValor = newPage;
@@ -69,6 +67,9 @@ export default function ProductsBody({search}) {
 
     const API = `https://api-clothes-ecommerce.onrender.com/api`;
 
+    // console.log(listProducts)
+    // console.log(searchParams.size)
+
     let toggleFilter = () => {
         setIsFilterOpen(prev => !prev);
     }
@@ -103,18 +104,16 @@ export default function ProductsBody({search}) {
                 setListProducts(info.filter((product) =>
                     product.name.toLowerCase().includes(query.toLowerCase())
                 ));
-            } else {
+            } else if (searchParams.size <= 2) {
                 setListProducts(info.data.filter((product) =>
                     product.name.toLowerCase().includes(query.toLowerCase())
                 ));
             }
             setPage(null)
         } else if (selectedFilters.length > 0) {
-            setListProducts(info)
-            setListPages(null)
-        } else {
-            setListProducts(info.data)
-            setListPages(info.last_page)
+            return setListProducts(info) && setListPages(null);
+        } else if(searchParams.size <= 1) {
+            return setListProducts(info.data) && setListPages(info.last_page);
         }
     }
     
@@ -135,14 +134,10 @@ export default function ProductsBody({search}) {
             .then(res => res.json())
             .then((info) => {
                 searchedProducts(info)
-                console.log(fetchUrl)
-                console.log(selectedFilters)
             })
             .catch(err => console.log(err))
     }, [selectedFilters, selectedPage, search, query, searchParams])
     
-    // console.log(`${searchParams.getAll('gender').join('&gender[]=')}`)
-    // console.log(selectedFilters)
     return (
         <main id="products-body">
             <div className="products-header-container">
