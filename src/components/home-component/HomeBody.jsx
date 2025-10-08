@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Body.css'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function BannerHome() {
 
@@ -40,12 +40,60 @@ function BannerHome() {
         setCurrentIndex((prevIndex => (prevIndex + 1) % bannerSlider.length))
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === "ArrowLeft") {
+            prevSlide();
+        } else if (event.key === "ArrowRight") {
+            nextSlide();
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
+    const [startX, setStartX] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [translateX, setTranslateX] = useState(0);
+
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.clientX);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const diff = e.clientX - startX;
+        setTranslateX(diff);
+    };
+
+    const handleMouseUp = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+
+        if (translateX > 100) {
+            prevSlide();
+        } else if (translateX < -100) {
+            nextSlide();
+        }
+
+        setTranslateX(0);
+    };
+
     return (
         <section id='banner-section'>
             <div className="discount-message">
                 ¡Descuento del 50% en ropa de invierno!
             </div>
-            <div className="slider-container">
+            <div 
+                className="slider-container" 
+                onMouseDown={handleMouseDown} 
+                onMouseMove={handleMouseMove} 
+                onMouseUp={handleMouseUp}
+            >
                 <div className="left-arrow-container">
                     <button onClick={prevSlide}><img src="/img/left-arrow-icon.png" alt="left-arrow-icon" /></button>
                 </div>
@@ -54,9 +102,9 @@ function BannerHome() {
                         <div key={index} className="banner-and-yap-container">
                             <div className="banner-and-yap-section">
                                 <div className="yapping">
-                                    <h1>{info.titleBanner}</h1>
-                                    <p>{info.descBanner}</p>
-                                    <Link to="/products?p=1">Explorar</Link>
+                                    <h1 className="select-none">{info.titleBanner}</h1>
+                                    <p className="select-none">{info.descBanner}</p>
+                                    <Link to="/products?p=1" className="select-none">Explorar</Link>
                                 </div>
                                 <div className="image-model">
                                     <img className={info.imgClass} src={info.imgModel} alt={info.alt} />

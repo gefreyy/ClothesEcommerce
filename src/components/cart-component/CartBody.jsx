@@ -32,7 +32,7 @@ export default function CartBody() {
                 </div>
                 <div className="actions-cart">
                     <button className="vaciar-btn" onClick={clearCart}>Vaciar carrito</button>
-                    <button onClick={() => navigate('/products')} className="continuar-btn">Continuar comprando →</button>
+                    <button onClick={() => navigate('/products?p=1')} className="continuar-btn">Continuar comprando →</button>
                 </div>
             </div>
             <hr className='separator' style={{margin: '1rem'}}/>
@@ -48,6 +48,7 @@ export default function CartBody() {
                 <ModalProduct
                     closeModal={closeModal}
                     isModalOpened={isModalOpen}
+                    setIsModalOpen={setIsModalOpen}
                     modalInfo={modalInfo}
                 />
                 <div className="price-container">

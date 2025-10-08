@@ -91,18 +91,27 @@ export default function ContactBody() {
             <hr className='separator'/>
             <section className='fisical-stores'>
                 <h1>También puede acercarse a nuestros modulos presenciales de atencion al cliente.</h1>
-                <div className="store-cards-section">
+                <div className="w-full max-w-[860px] grid place-items-center grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-7 my-20">
                     {stores.map((store, index) => (
-                        <article className='store-card' key={index}>
-                            <img src={store.imgStore} alt="store-img" />
-                            <div className="info-location-container">
-                                <h2>{store.city}</h2>
-                                <p>{store.location}</p>
+                        <article
+                            key={index}
+                            className="relative flex flex-col w-3/4 aspect-square border border-gray-300 rounded-[15px] square overflow-hidden cursor-pointer shadow-[0_0_21px_6px_rgba(0,0,0,0.12)] transition-transform duration-300 ease-in-out hover:scale-105"
+                        >
+                            <div className="w-full h-full">
+                                <img src={store.imgStore} className=" object-cover" alt="store-img" />
                             </div>
-                            <div className="pin-img-container">
-                                <img src="/img/pin-icon.png" alt="pin-icon" />
+                            <div className="absolute bottom-0 w-full flex flex-col bg-white p-4 gap-2">
+                                <h2 className="font-semibold">{store.city}</h2>
+                                <p className="text-[clamp(0.8rem,1vw,1rem)]">{store.location}</p>
                             </div>
-                        </article>
+                            <div className="absolute bottom-16 right-3 z-10">
+                                <img
+                                    className="flex border-gray-300 border-[1px] rounded-full p-1 bg-white"
+                                    src="/img/pin-icon.png"
+                                    alt="pin-icon"
+                                />
+                            </div>
+                      </article>
                     ))}
                 </div>
             </section>

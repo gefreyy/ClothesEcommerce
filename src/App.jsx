@@ -8,6 +8,7 @@ import AboutUs from './pages/AboutUs.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Cart from './pages/Cart.jsx'
+import ToS from './pages/ToS.jsx'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
       <Route path='/cart' element={<Cart />} />
+      <Route path='/tos' element={<ToS />}/>
     </Routes>
   )
 }

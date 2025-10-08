@@ -1,16 +1,24 @@
 import { useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
+import { FaSpinner } from "react-icons/fa"
+import { useGetBrandsQuery, useGetGendersQuery, useGetCategoriesQuery } from "../../productsApi"
 
 export default function ProductFilters({
-    listGenders,
-    listBrands,
-    listCategories,
     isFilterOpen,
     setSelectedFilters,
     selectedFilters,
     setSearchParams,
     searchParams,
+    handlePriceFilter,
+    setPrice,
+    loading,
+    price
 }) {
+
+    const { data: listBrands, isLoading: isLoadingBrands, error: errorBrands } = useGetBrandsQuery();
+    const { data: listGenders, isLoading: isLoadingGenders, error: errorGenders } = useGetGendersQuery();
+    const { data: listCategories, isLoading: isLoadingCategories, error: errorCategories } = useGetCategoriesQuery();
+    
     const handleGenderCheckboxChange = (e) => {
         const gender = e.target.value;
         const checked = e.target.checked;
@@ -79,11 +87,21 @@ export default function ProductFilters({
 
     return (
         <aside className={isFilterOpen ? 'products-filters-container open' : 'products-filters-container'}>
-            <div className="products-filters">
-                <h3>Filtros</h3>
-                <div className="filters-container">
-                    {listGenders.map((gender, index) => (
-                        <div className="filter-item" key={index}>
+            {loading ? (
+                <div className="flex items-center justify-center">
+                    <FaSpinner className="animate-spin text-gray-600 text-3xl" />
+                </div>
+            ) : (
+                <div className="products-filters">
+                    <h3>Filtros</h3>
+                    {isLoadingBrands || isLoadingGenders || isLoadingCategories ? (
+                        <div className="flex items-center justify-center">
+                            <FaSpinner className="animate-spin text-gray-600 text-3xl" />
+                        </div>
+                    ) : (
+                        <div className="filters-container">
+                        {listGenders?.map((gender, index) => (
+                            <div className="filter-item" key={index}>
                             <input
                                 type="checkbox"
                                 id={`GENDER-${gender.id}`}
@@ -98,8 +116,8 @@ export default function ProductFilters({
                         </div>
                     ))}
                     <hr className="separator-filter"/>
-                    {listBrands.map((brand, index) => (
-                        <div className="filter-item" key={index}>
+                    {listBrands?.map((brand, index) => (
+                        <div className="filter-item cursor-pointer" key={index}>
                             <input
                                 type="checkbox"
                                 id={`BRAND-${brand.id}`}
@@ -114,8 +132,8 @@ export default function ProductFilters({
                         </div>
                     ))}
                     <hr className="separator-filter"/>
-                    {listCategories.map((category, index) => (
-                        <div className="filter-item" key={index}>
+                    {listCategories?.map((category, index) => (
+                        <div className="filter-item cursor-pointer" key={index}>
                             <input 
                                 id={`CATEGORY-${category.id}`}
                                 type="checkbox" 
@@ -132,22 +150,32 @@ export default function ProductFilters({
                         
                     <div className="filter-price-slider">
                         <label htmlFor="price">Precio</label>
-                        <input 
-                            type="range"
-                            id="price"
-                            name="price"
-                            min="39"
-                            max="249"
-                            // value={price}
-                            // onChange={(e) => onPriceChange(Number(e.target.value))}
-                        />
-                        <div className="price-range">
-                            <p>S/39.90</p>
-                            <p>S/249.90</p>
+                            <input 
+                                type="range"
+                                id="price"
+                                name="price"
+                                min="39"
+                                max="249"
+                                value={price}
+                                onChange={(e) => {
+                                    setPrice(Number(e.target.value));
+                                }}
+                                onMouseUp={(e) => {
+                                    handlePriceFilter(Number(e.target.value));
+                                }}
+                                onTouchEnd={(e) => {
+                                    handlePriceFilter(Number(e.target.value));
+                                }}
+                            />
+                                <div className="price-range">
+                                    <p>S/39.90</p>
+                                    <p>S/249.90</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
-            </div>
+            )}
         </aside> 
     )
 }

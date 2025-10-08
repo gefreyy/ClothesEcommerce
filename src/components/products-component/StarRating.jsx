@@ -18,8 +18,8 @@ export default function StarRating() {
                 onMouseLeave={() => setHover(0)}
                 >
                 <svg 
-                    width="40" 
-                    height="40" 
+                    width="25" 
+                    height="25" 
                     viewBox="0 0 24 24" 
                     fill={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"} 
                     stroke="#ffc107" 

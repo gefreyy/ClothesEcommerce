@@ -1,16 +1,10 @@
-export default function Pagination({selectedPage, currentPage, listPages}) {
-    let pageNumbers = [];
-
-    for(let i = 1; i <= listPages; i++) {
-        pageNumbers.push(i);
-    }
-
-    if (pageNumbers.length < 1) {
+export default function Pagination({selectedPage, currentPage, data, isLoading, isFetching}) {
+    if (data?.last_page < 1 || data?.data?.length === 0 || isLoading || isFetching) {
         return null;
     } else {
         return(
             <div className="pagination-section">
-                {pageNumbers.map((pageNumber) => (
+                {Array.from({ length: data?.last_page }, (_, i) => i + 1).map((pageNumber) => (
                     <button 
                         key={pageNumber} 
                         onClick={() => { selectedPage(pageNumber); }}
